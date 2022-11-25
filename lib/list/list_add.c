@@ -8,17 +8,22 @@
 #include "stdlib.h"
 #include "list.h"
 
+
+
 static unsigned int list_add_node(list_t *list, list_node_t *node)
 {
     list->size++;
     if (list->tail == NULL) {
-        list->head = NULL;
-        list->tail = NULL;
+        list->head = node;
+        list->tail = node;
+        return 0;
     }
-    node->prev = list->head;
-    list->head = node;
 
-    return list->size;
+    list->tail->next = node;
+    node->prev = list->tail;
+    list->tail = node;
+
+    return list->size - 1;
 }
 
 unsigned int list_add(list_t *list, void *value)
@@ -32,5 +37,5 @@ unsigned int list_add(list_t *list, void *value)
     node->next = NULL;
     node->prev = NULL;
 
-    return list_add_node(list, value);
+    return list_add_node(list, node);
 }

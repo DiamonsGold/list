@@ -7,17 +7,19 @@
 
 NAME	=	list
 SRC		=	list_create.c	\
-			list_add.c
+			list_add.c		\
+			list_get.c		\
+			list_remove.c
 OBJ		=	$(SRC:.c=.o)
 
 CC		=	gcc
-CFLAGS	=	-I./include/ -Wall -wextra
+CFLAGS	=	-I./../../include/ -Wall -Wextra -g
 LDFLAGS	=	-L.
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	ar rc lib$@ $(OBJ)
+	ar rc lib$@.a $(OBJ)
 
 clean:
 	rm -f $(OBJ)
