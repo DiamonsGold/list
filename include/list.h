@@ -19,4 +19,6 @@
 
     void *list_remove(list_t *list, unsigned int index);
 
+    void list_destroy(list_t *list);
+
 #endif /* !LIST_H */

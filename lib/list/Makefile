@@ -9,7 +9,8 @@ NAME	=	list
 SRC		=	list_create.c	\
 			list_add.c		\
 			list_get.c		\
-			list_remove.c
+			list_remove.c	\
+			list_destroy.c
 OBJ		=	$(SRC:.c=.o)
 
 CC		=	gcc

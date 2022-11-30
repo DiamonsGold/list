@@ -2,3 +2,5 @@
 output
 main.c
 *sh
+*.o
+*.a
