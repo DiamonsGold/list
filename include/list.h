@@ -8,7 +8,6 @@
 #ifndef LIST_H
     #define LIST_H
 
-    #include "list/macro.h"
     #include "list/struct.h"
 
     list_t *list_create(void);
@@ -20,5 +19,7 @@
     void *list_remove(list_t *list, unsigned int index);
 
     void list_destroy(list_t *list);
+
+    void list_sort(list_t *list, int (*sort)());
 
 #endif /* !LIST_H */

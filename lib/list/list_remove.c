@@ -10,11 +10,11 @@
 
 void *list_remove(list_t *list, unsigned int index)
 {
+    void *value;
     list_node_t *node;
 
     if ((list->size <= index) || (list == NULL))
         return NULL;
-
     node = list->head;
     for (unsigned int i = 0 ; i < index ; i++)
         node = node->next;
@@ -26,8 +26,8 @@ void *list_remove(list_t *list, unsigned int index)
         list->tail = node->prev;
     else
         node->next->prev = node->prev;
-
     list->size--;
-
-    return node->value;
+    value = node->value;
+    free(node);
+    return value;
 }
