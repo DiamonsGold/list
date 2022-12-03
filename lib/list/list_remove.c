@@ -8,6 +8,18 @@
 #include <stdlib.h>
 #include "list.h"
 
+static void link_node(list_t *list, list_node_t *node)
+{
+    if (node->prev != NULL)
+        node->prev->next = node->next;
+    if (node->next != NULL)
+        node->next->prev = node->prev;
+    if (node == list->head)
+        list->head = node->next;
+    if (node == list->tail)
+        list->tail = node->prev;
+}
+
 void *list_remove(list_t *list, unsigned int index)
 {
     void *value;
@@ -15,19 +27,16 @@ void *list_remove(list_t *list, unsigned int index)
 
     if ((list->size <= index) || (list == NULL))
         return NULL;
+    
     node = list->head;
-    for (unsigned int i = 0 ; i < index ; i++)
+    for (unsigned int i = 0; i < index; i++)
         node = node->next;
-    if (index == 0)
-        list->head = node->next;
-    else
-        node->prev->next = node->next;
-    if (index == list->size - 1)
-        list->tail = node->prev;
-    else
-        node->next->prev = node->prev;
-    list->size--;
+
+    link_node(list, node);
+
     value = node->value;
     free(node);
+    list->size--;
+
     return value;
 }
